@@ -1,6 +1,7 @@
 import azure.functions as func
 from check_for_internships import check_internship_availability, download_html
 import logging
+import os
 
 app = func.FunctionApp()
 
@@ -13,4 +14,6 @@ def function(mytimer: func.TimerRequest) -> None:
     logging.info("Starting function ...")
     html = download_html(url)
     logging.info(check_internship_availability(html))
+
+    logging.info(os.getenv('RECEIVER_EMAIL'))
 
