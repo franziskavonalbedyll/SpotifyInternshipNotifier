@@ -1,2 +1,3 @@
 requests
 azure-functions
+azure-communication-email
