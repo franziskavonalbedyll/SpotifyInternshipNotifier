@@ -28,19 +28,18 @@ def check_internship_availability(html_content):
     match = re.search(r'"label":"Internship","positions":(\d+)', html_content)
     if match:
         number_of_positions = match.group(1)
-        print(number_of_positions)
+        return number_of_positions
+        # print(number_of_positions)
     else:
-        print("No match found")
-
-    print("")
+        return "No match found"
 
 
 # URL of the Spotify jobs page
-url = 'https://www.lifeatspotify.com/jobs?j=internship'
+## url = 'https://www.lifeatspotify.com/jobs?j=internship'
 
-# Download the HTML content of the page
-html_content = download_html(url)
+## Download the HTML content of the page
+# html_content = download_html(url)
 
-# Check if there are internship positions available
-result = check_internship_availability(html_content)
-print(result)
+## Check if there are internship positions available
+# result = check_internship_availability(html_content)
+# print(result)
