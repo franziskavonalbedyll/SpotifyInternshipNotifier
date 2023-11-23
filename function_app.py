@@ -6,8 +6,9 @@ app = func.FunctionApp()
 
 @app.function_name(name="check_for_internship_offers")
 @app.schedule(schedule="0 */5 * * * *",
+              arg_name="mytimer",
               run_on_startup=True)
-def function() -> None:
+def function(mytimer: func.TimerRequest) -> None:
     url = 'https://www.lifeatspotify.com/jobs?j=internship'
     logging.info("Starting function ...")
     html = download_html(url)
