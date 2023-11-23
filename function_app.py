@@ -7,7 +7,7 @@ from azure.communication.email import EmailClient
 app = func.FunctionApp()
 
 @app.function_name(name="check_for_internship_offers")
-@app.schedule(schedule="0 * * * * *",
+@app.schedule(schedule="0 0 8,20 * * *",
               arg_name="mytimer",
               run_on_startup=True)
 def function(mytimer: func.TimerRequest) -> None:
@@ -17,7 +17,6 @@ def function(mytimer: func.TimerRequest) -> None:
     logging.info(check_internship_availability(html))
 
     connection_string = os.getenv('COMMUNICATION_CONNECTION_STRING')
-    logging.info(connection_string)
     email_client = EmailClient.from_connection_string(connection_string)
 
     message = {
