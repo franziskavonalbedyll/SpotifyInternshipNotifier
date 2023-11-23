@@ -19,5 +19,18 @@ def function(mytimer: func.TimerRequest) -> None:
     connection_string = os.getenv('COMMUNICATION_CONNECTION_STRING')
     email_client = EmailClient.from_connection_string(connection_string)
 
-    logging.info(os.getenv('RECEIVER_EMAIL'))
-
+    message = {
+        "content": {
+            "subject": "New Internship Alert",
+            "plainText": "A new internship offer has been posted.",
+            "html": "<html><h1>A new internship offer has been posted.</h1></html>"
+        },
+        "recipients": {
+            "to": [
+                {"address": f"{os.getenv('RECEIVER_EMAIL')}", "displayName": "Your Name"}
+            ]
+        },
+        "senderAddress": f"{os.getenv('SENDER_EMAIL')}"
+    }
+    poller = email_client.begin_send(message)
+    result = poller.result()
