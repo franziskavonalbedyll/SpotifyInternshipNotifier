@@ -5,7 +5,7 @@ import logging
 app = func.FunctionApp()
 
 @app.function_name(name="check_for_internship_offers")
-@app.schedule(schedule="0 */5 * * * *",
+@app.schedule(schedule="0 * * * * *",
               arg_name="mytimer",
               run_on_startup=True)
 def function(mytimer: func.TimerRequest) -> None:
