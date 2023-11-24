@@ -38,12 +38,12 @@ def check_internship_availability(html_content):
         return results
 
 
-# URL of the Spotify jobs page
-url = 'https://www.lifeatspotify.com/jobs?j=internship'
+## URL of the Spotify jobs page
+# url = 'https://www.lifeatspotify.com/jobs?j=internship'
 
 ## Download the HTML content of the page
-html_content = download_html(url)
+# html_content = download_html(url)
 
 ## Check if there are internship positions available
-result = check_internship_availability(html_content)
-print(result)
+# result = check_internship_availability(html_content)
+# print(result)
