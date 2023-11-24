@@ -11,19 +11,32 @@ app = func.FunctionApp()
               arg_name="mytimer",
               run_on_startup=True)
 def function(mytimer: func.TimerRequest) -> None:
-    url = 'https://www.lifeatspotify.com/jobs?j=internship'
     logging.info("Starting function ...")
+
+    url = 'https://www.lifeatspotify.com/jobs?j=internship'
     html = download_html(url)
-    logging.info(check_internship_availability(html))
+    result = check_internship_availability(html)
+    logging.info(result)
+
+    if result["match"] == True:
+        if result["number_of_positions"] > 0:
+            subject = f"{result['number_of_positions']} Internship Offers available"
+            plainText = f"There are {result['number_of_positions']} offers available."
+        else:
+            subject = "No Internship Offers available"
+            plainText = "Currently, there are no internship offers available."
+    else:
+        subject = "Couldn't find information on internships, please check the website for any changes. "
+        plainText = subject
 
     connection_string = os.getenv('COMMUNICATION_CONNECTION_STRING')
     email_client = EmailClient.from_connection_string(connection_string)
 
     message = {
         "content": {
-            "subject": "New Internship Alert",
-            "plainText": "A new internship offer has been posted.",
-            "html": "<html><h1>A new internship offer has been posted.</h1></html>"
+            "subject": subject,
+            "plainText": plainText,
+            "html": f"<html><h1>{plainText}.</h1></html>"
         },
         "recipients": {
             "to": [
