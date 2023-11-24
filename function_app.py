@@ -40,10 +40,10 @@ def function(mytimer: func.TimerRequest) -> None:
         },
         "recipients": {
             "to": [
-                {"address": f"{os.getenv('RECEIVER_EMAIL')}", "displayName": "Your Name"}
+                {"address": f"{os.getenv('RECEIVER_EMAIL')}", "displayName": "Spotify Internship Checker Bot"}
             ]
         },
         "senderAddress": f"{os.getenv('SENDER_EMAIL')}"
     }
-    poller = email_client.begin_send(message)
-    result = poller.result()
+
+    email_client.begin_send(message)
