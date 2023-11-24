@@ -36,7 +36,7 @@ def function(mytimer: func.TimerRequest) -> None:
         "content": {
             "subject": subject,
             "plainText": plainText,
-            "html": f"<html><h1>{plainText}.</h1></html>"
+            "html": f"<html><h1>{plainText}</h1></html>"
         },
         "recipients": {
             "to": [
